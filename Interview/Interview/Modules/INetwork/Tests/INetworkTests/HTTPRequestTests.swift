@@ -1,6 +1,6 @@
 import Foundation
 import XCTest
-@testable import JANetwork
+@testable import INetwork
 
 final class HTTPRequestTests: XCTestCase {
     func testAsURLRequestBuildsRequestWithExpectedValues() throws {

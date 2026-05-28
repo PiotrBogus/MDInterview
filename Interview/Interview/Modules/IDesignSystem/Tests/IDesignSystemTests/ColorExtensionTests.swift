@@ -1,6 +1,6 @@
 import SwiftUI
 import XCTest
-@testable import JADesignSystem
+@testable import IDesignSystem
 
 final class ColorExtensionTests: XCTestCase {
     func testHexInitializerCreatesColorForValidHex() {

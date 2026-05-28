@@ -85,7 +85,13 @@ struct GitHubSearchService: GitHubSearchProviding {
             let repositoriesResponse = try await repositoriesResponseTask
 
             if let currentUsersPage, let usersResponse {
-                collectedItems.append(contentsOf: usersResponse.items.map(GitHubAutocompleteItem.user))
+                let batchItems = Array(
+                    usersResponse.items
+                        .map(GitHubAutocompleteItem.user)
+                        .sorted { $0.sortKey < $1.sortKey }
+                        .prefix(usersBatchLimit)
+                )
+                collectedItems.append(contentsOf: batchItems)
                 nextUsersPage = nextPage(
                     after: currentUsersPage,
                     pageSize: usersBatchLimit,
@@ -94,7 +100,13 @@ struct GitHubSearchService: GitHubSearchProviding {
             }
 
             if let currentRepositoriesPage, let repositoriesResponse {
-                collectedItems.append(contentsOf: repositoriesResponse.items.map(GitHubAutocompleteItem.repository))
+                let batchItems = Array(
+                    repositoriesResponse.items
+                        .map(GitHubAutocompleteItem.repository)
+                        .sorted { $0.sortKey < $1.sortKey }
+                        .prefix(repositoriesBatchLimit)
+                )
+                collectedItems.append(contentsOf: batchItems)
                 nextRepositoriesPage = nextPage(
                     after: currentRepositoriesPage,
                     pageSize: repositoriesBatchLimit,
@@ -129,7 +141,6 @@ struct GitHubSearchService: GitHubSearchProviding {
         response: SearchResponse<Item>
     ) -> Int? {
         guard !response.items.isEmpty else { return nil }
-        guard response.items.count == pageSize else { return nil }
         guard currentPage * pageSize < response.totalCount else { return nil }
         return currentPage + 1
     }

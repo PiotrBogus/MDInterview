@@ -51,7 +51,7 @@ struct GitHubRepository: Codable, Hashable, Sendable {
     let fullName: String
     let htmlURL: URL
 
-    init(id: Int, name: String, fullName: String, htmlURL: URL) {
+    nonisolated init(id: Int, name: String, fullName: String, htmlURL: URL) {
         self.id = id
         self.name = name
         self.fullName = fullName
@@ -87,7 +87,7 @@ struct GitHubUser: Codable, Hashable, Sendable {
     let login: String
     let htmlURL: URL
 
-    init(id: Int, login: String, htmlURL: URL) {
+    nonisolated init(id: Int, login: String, htmlURL: URL) {
         self.id = id
         self.login = login
         self.htmlURL = htmlURL

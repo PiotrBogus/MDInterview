@@ -4,6 +4,7 @@ import Testing
 @testable import Interview
 
 @Suite("GitHub Autocomplete")
+@MainActor
 struct GitHubAutocompleteTests {
 
     @Test
@@ -145,6 +146,7 @@ struct GitHubAutocompleteTests {
         )
 
         viewModel.send(.queryChanged("swift"))
+        try await Task.sleep(for: .milliseconds(100))
         viewModel.send(.queryChanged("swiftui"))
 
         try await Task.sleep(for: .milliseconds(250))
@@ -293,10 +295,10 @@ struct GitHubAutocompleteTests {
         )
 
         viewModel.send(.queryChanged("swift"))
-        await Task.yield()
+        try await Task.sleep(for: .milliseconds(50))
 
         viewModel.send(.retryLoadNextPage)
-        await Task.yield()
+        try await Task.sleep(for: .milliseconds(50))
 
         #expect(viewModel.state.items.map(\.title) == ["alpha", "zeta"])
 
@@ -326,7 +328,7 @@ struct GitHubAutocompleteTests {
         )
 
         viewModel.send(.queryChanged("ios"))
-        await Task.yield()
+        try await Task.sleep(for: .milliseconds(50))
 
         #expect(
             viewModel.state.viewStatus

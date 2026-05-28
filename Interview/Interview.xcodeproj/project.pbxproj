@@ -32,6 +32,7 @@
 		496D3A772FC73B56009CAF02 /* Interview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Interview.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		496D3A842FC73B58009CAF02 /* InterviewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InterviewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		496D3A8E2FC73B58009CAF02 /* InterviewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InterviewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		496D4A332FC83654009CAF02 /* Interview.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Interview.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -82,6 +83,7 @@
 		496D3A6E2FC73B56009CAF02 = {
 			isa = PBXGroup;
 			children = (
+				496D4A332FC83654009CAF02 /* Interview.xctestplan */,
 				496D3A792FC73B56009CAF02 /* Interview */,
 				496D3A872FC73B58009CAF02 /* InterviewTests */,
 				496D3A912FC73B58009CAF02 /* InterviewUITests */,
