@@ -134,8 +134,7 @@ struct GitHubAutocompleteTests {
                 )
             ],
             initialDelayByQuery: [
-                "swift": .milliseconds(200),
-                "swiftui": .milliseconds(10)
+                "swift": .milliseconds(500)
             ]
         )
 
@@ -146,10 +145,11 @@ struct GitHubAutocompleteTests {
         )
 
         viewModel.send(.queryChanged("swift"))
-        try await Task.sleep(for: .milliseconds(100))
+        // Wait until "swift" has actually entered service.search (and been recorded)
+        // before cancelling it — avoids any timing dependency.
+        await service.waitUntilSearchCalled(query: "swift")
         viewModel.send(.queryChanged("swiftui"))
-
-        try await Task.sleep(for: .milliseconds(250))
+        await viewModel.searchTask?.value
 
         #expect(viewModel.state.viewStatus == .results)
         #expect(viewModel.state.items.map(\.title) == ["swiftui"])
@@ -190,7 +190,7 @@ struct GitHubAutocompleteTests {
         #expect(requestedQueriesBeforeRelease.isEmpty)
 
         await gate.release()
-        try await Task.sleep(for: .milliseconds(20))
+        await viewModel.searchTask?.value
 
         #expect(viewModel.state.isDebouncing == false)
     }
@@ -234,7 +234,7 @@ struct GitHubAutocompleteTests {
         #expect(viewModel.state.isDebouncing == true)
 
         await gate.release()
-        try await Task.sleep(for: .milliseconds(20))
+        await viewModel.searchTask?.value
 
         let requestedQueries = await service.requestedQueries()
         #expect(requestedQueries == ["swiftui"])
@@ -295,10 +295,10 @@ struct GitHubAutocompleteTests {
         )
 
         viewModel.send(.queryChanged("swift"))
-        try await Task.sleep(for: .milliseconds(50))
+        await viewModel.searchTask?.value
 
         viewModel.send(.retryLoadNextPage)
-        try await Task.sleep(for: .milliseconds(50))
+        await viewModel.paginationTask?.value
 
         #expect(viewModel.state.items.map(\.title) == ["alpha", "zeta"])
 
@@ -328,7 +328,7 @@ struct GitHubAutocompleteTests {
         )
 
         viewModel.send(.queryChanged("ios"))
-        try await Task.sleep(for: .milliseconds(50))
+        await viewModel.searchTask?.value
 
         #expect(
             viewModel.state.viewStatus
@@ -387,6 +387,7 @@ private actor MockGitHubSearchService: GitHubSearchProviding {
     private let initialDelayByQuery: [String: Duration]
     private var queries: [String] = []
     private var pageRequests: [MockPageRequest] = []
+    private var searchCalledContinuations: [String: CheckedContinuation<Void, Never>] = [:]
 
     init(
         firstPagesByQuery: [String: GitHubSearchPage],
@@ -400,6 +401,7 @@ private actor MockGitHubSearchService: GitHubSearchProviding {
 
     func search(matching query: String) async throws -> GitHubSearchPage {
         queries.append(query)
+        searchCalledContinuations.removeValue(forKey: query)?.resume()
 
         if let delay = initialDelayByQuery[query] {
             try await Task.sleep(for: delay)
@@ -428,6 +430,12 @@ private actor MockGitHubSearchService: GitHubSearchProviding {
 
     func requestedPageLoads() -> [MockPageRequest] {
         pageRequests
+    }
+
+    func waitUntilSearchCalled(query: String) async {
+        await withCheckedContinuation { continuation in
+            searchCalledContinuations[query] = continuation
+        }
     }
 }
 

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9A3E3B6A2FD1000100A00001 /* INetwork in Frameworks */ = {isa = PBXBuildFile; productRef = 9A3E3B692FD1000100A00001 /* INetwork */; };
 		9A3E3B6B2FD1000100A00001 /* IDesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 9A3E3B6C2FD1000100A00001 /* IDesignSystem */; };
+		BBAABB032FD2000100000001 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = BBAABB022FD2000100000001 /* SnapshotTesting */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBAABB032FD2000100000001 /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +148,7 @@
 			);
 			name = InterviewTests;
 			packageProductDependencies = (
+				BBAABB022FD2000100000001 /* SnapshotTesting */,
 			);
 			productName = InterviewTests;
 			productReference = 496D3A842FC73B58009CAF02 /* InterviewTests.xctest */;
@@ -209,6 +212,7 @@
 			packageReferences = (
 				9A3E3B6D2FD1000100A00001 /* XCLocalSwiftPackageReference "Interview/Modules/IDesignSystem" */,
 				9A3E3B682FD1000100A00001 /* XCLocalSwiftPackageReference "Interview/Modules/INetwork" */,
+				BBAABB012FD2000100000001 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 496D3A782FC73B56009CAF02 /* Products */;
@@ -630,6 +634,17 @@
 		};
 /* End XCLocalSwiftPackageReference section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		BBAABB012FD2000100000001 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
+			requirement = {
+				kind = exactVersion;
+				version = 1.19.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		9A3E3B692FD1000100A00001 /* INetwork */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -640,6 +655,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9A3E3B6D2FD1000100A00001 /* XCLocalSwiftPackageReference "Interview/Modules/IDesignSystem" */;
 			productName = IDesignSystem;
+		};
+		BBAABB022FD2000100000001 /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BBAABB012FD2000100000001 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

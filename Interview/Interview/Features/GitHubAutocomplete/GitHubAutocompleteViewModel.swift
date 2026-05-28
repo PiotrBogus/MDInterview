@@ -55,8 +55,8 @@ final class GitHubAutocompleteViewModel: ObservableObject {
     private let service: any GitHubSearchProviding
     private let debounceDuration: Duration
     private let sleep: @Sendable (Duration) async throws -> Void
-    private var searchTask: Task<Void, Never>?
-    private var paginationTask: Task<Void, Never>?
+    var searchTask: Task<Void, Never>?
+    var paginationTask: Task<Void, Never>?
 
     init(
         service: any GitHubSearchProviding,
