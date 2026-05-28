@@ -45,7 +45,7 @@ struct TokenSetupView: View {
     private var header: some View {
         VStack(alignment: .leading, spacing: SpacingToken.s10) {
             HStack(spacing: SpacingToken.s8) {
-                Image(systemName: "key.horizontal.fill")
+                Image(icon: .key)
                     .font(.system(size: 12, weight: .bold))
                     .foregroundStyle(Color.primary500)
 
@@ -80,7 +80,7 @@ struct TokenSetupView: View {
                         .fill(Color.primary100)
                         .frame(width: 44, height: 44)
 
-                    Image(systemName: "key.horizontal.fill")
+                    Image(icon: .key)
                         .font(.system(size: 18, weight: .semibold))
                         .foregroundStyle(Color.primary500)
                 }
@@ -100,7 +100,7 @@ struct TokenSetupView: View {
                 Button {
                     viewModel.isTokenVisible.toggle()
                 } label: {
-                    Image(systemName: viewModel.isTokenVisible ? "eye.slash" : "eye")
+                    Image(icon: viewModel.isTokenVisible ? .eyeSlash : .eye)
                         .font(.system(size: 16, weight: .semibold))
                         .foregroundStyle(Color.neutral500)
                 }

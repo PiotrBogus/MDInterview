@@ -25,7 +25,7 @@ struct SettingsView: View {
                 .padding(.horizontal, SpacingToken.s20)
                 .padding(.top, SpacingToken.s16)
             }
-            .navigationTitle("Settings")
+            .navigationTitle(Strings.Settings.title)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -45,7 +45,7 @@ struct SettingsView: View {
 
     private var appearanceCard: some View {
         VStack(alignment: .leading, spacing: SpacingToken.s4) {
-            Text("Appearance")
+            Text(Strings.Settings.Appearance.section)
                 .font(TypographyToken.autocomplete.badge)
                 .foregroundStyle(Color.neutral500)
                 .padding(.horizontal, SpacingToken.s4)

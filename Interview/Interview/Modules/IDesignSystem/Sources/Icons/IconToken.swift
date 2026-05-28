@@ -15,6 +15,9 @@ public enum IconToken: String, Sendable {
     case settings = "gearshape.fill"
     case moon = "moon.fill"
     case sun = "sun.max.fill"
+    case key = "key.horizontal.fill"
+    case eye = "eye"
+    case eyeSlash = "eye.slash"
 
     public var systemName: String {
         rawValue

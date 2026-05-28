@@ -32,6 +32,25 @@ enum Strings {
         }
     }
 
+    // MARK: Settings
+
+    enum Settings {
+
+        /// "Settings"
+        static let title = NSLocalizedString("settings.title", comment: "Navigation title for the Settings screen")
+
+        enum Appearance {
+            /// "Appearance"
+            static let section = NSLocalizedString("settings.appearance.section", comment: "Section header for the appearance picker in Settings")
+            /// "System"
+            static let system  = NSLocalizedString("settings.appearance.system",  comment: "Label for the System color scheme option in Settings")
+            /// "Light"
+            static let light   = NSLocalizedString("settings.appearance.light",   comment: "Label for the Light color scheme option in Settings")
+            /// "Dark"
+            static let dark    = NSLocalizedString("settings.appearance.dark",    comment: "Label for the Dark color scheme option in Settings")
+        }
+    }
+
     // MARK: Token Setup
 
     enum TokenSetup {

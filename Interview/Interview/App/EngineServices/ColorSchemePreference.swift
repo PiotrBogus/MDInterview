@@ -16,9 +16,9 @@ enum ColorSchemePreference: String, CaseIterable {
 
     var label: String {
         switch self {
-        case .system: "System"
-        case .light:  "Light"
-        case .dark:   "Dark"
+        case .system: Strings.Settings.Appearance.system
+        case .light:  Strings.Settings.Appearance.light
+        case .dark:   Strings.Settings.Appearance.dark
         }
     }
 
